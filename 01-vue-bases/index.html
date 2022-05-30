@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue JS</title>
+    <style>
+        .success {
+            background-color: lightgreen;
+            color: #fff;
+            padding: 10px;
+        }
+
+        .error {
+            background-color: indianred;
+            color: #fff;
+            padding: 10px;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <h1 :title="prenom">{{ message }} - {{ reverseMessage }}</h1>
+        <div v-html="message"></div>
+        <button @click="changeMessage">Changer</button>
+
+        <div v-if="success == true" class="success">
+            Félicitations !
+        </div>
+        <div v-else class="error">
+            En attente de validation...
+        </div>
+        <button @click.prevent.right="success = !success">Valider</button>
+
+        <ul>
+            <li v-for="contact in contacts">
+                {{ contact.toUpperCase() }}
+            </li>
+        </ul>
+
+        <input type="text" v-model="message" @keyup.shift.alt.exact="display('test')">
+        <input type="checkbox" v-model="success">
+
+        <div :class="{ success: name.length == 4, 'error danger': !success }"
+             :style="{ border: success ? '5px solid #000' : '0' }">
+            {{ success ? 'Succès' : 'Erreur' }}
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        var app = Vue.createApp({
+            // Les datas représentent les var
+            data() {
+                return {
+                    message: 'Salut Vue JS',
+                    prenom: 'Steven',
+                    success: false,
+                    contacts: ['Fiorella', 'Marina'],
+                }
+            },
+            computed: {
+                reverseMessage() {
+                    console.log('call');
+                    return this.message.split('').reverse().join('');
+                },
+            },
+            // methods représente les fonctions
+            methods: {
+                changeMessage() {
+                    // Dans this, on récupère les data et les méthodes
+                    console.log(this.message);
+                    this.message = `J'adore Vue JS`;
+                },
+                reverseMessage() {
+                    console.log('call');
+                    return this.message.split('').reverse().join('');
+                },
+                display(message) {
+                    alert(message);
+                }
+            },
+            beforeMount() {
+                console.log('before');
+            },
+            mounted() {
+                console.log('mounted');
+            },
+            updated() {
+                console.log('DOM à jour');
+            },
+        }).mount('#app');
+    </script>
+</body>
+</html>

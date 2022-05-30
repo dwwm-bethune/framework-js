@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 1</title>
+    <style>
+        .bg-grey {
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .bg-grey > div {
+            margin-bottom: 20px;
+        }
+
+        .bg-yellow {
+            background-color: lightyellow;
+            padding: 1px 20px;
+        }
+
+        .bg-red {
+            background-color: indianred;
+            color: #fff;
+            padding: 20px;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <div class="bg-grey">
+            <div>
+                <label for="name">Nom: </label>
+                <input type="text" v-model="name" id="name">
+                <span>Maximum 15 caractères</span>
+            </div>
+            <div>
+                <label for="age">Âge: </label>
+                <input type="text" v-model="age" id="age">
+            </div>
+        </div>
+
+        <div class="bg-yellow" v-if="name && age">
+            <p>Mon nom est <strong>{{ name }}</strong> et j'ai <strong>{{ age }}</strong> ans.</p>
+            <p>Dans 10 ans, j'aurai <strong>{{ old }}</strong> ans.</p>
+            <p>Mon nom se compose de <strong>{{ name.length }}</strong> caractères.</p>
+            <p>Mon nom en majuscules est <strong>{{ name.toUpperCase() }}</strong>.</p>
+        </div>
+        <div class="bg-red" v-else>
+            Veuillez entrer un nom et un âge valide.
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    name: 'Fiorella',
+                    age: 2,
+                };
+            },
+            computed: {
+                old() {
+                    return +this.age + 10;
+                },
+            },
+        }).mount('#app');
+    </script>
+</body>
+</html>
