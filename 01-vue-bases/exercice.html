@@ -26,8 +26,30 @@
             padding: 20px;
         }
 
+        .bg-blue {
+            background-color: lightblue;
+        }
+
+        .bg-pink {
+            background-color: pink;
+        } 
+
         [v-cloak] {
             display: none;
+        }
+
+        input {
+            border: 3px solid transparent;
+        }
+
+        .error {
+            background-color: #ffc4c4;
+            border-color: indianred;
+            margin-right: 8px;
+        }
+
+        .error + span {
+            color: indianred;
         }
     </style>
 </head>
@@ -36,16 +58,27 @@
         <div class="bg-grey">
             <div>
                 <label for="name">Nom: </label>
-                <input type="text" v-model="name" id="name">
-                <span>Maximum 15 caractères</span>
+                <input v-focus :class="{ error: name.length <= 0 || name.length > 15 }" type="text" v-model="name" id="name">
+                <span v-if="name.length <= 0 || name.length > 15">Maximum 15 caractères</span>
             </div>
             <div>
                 <label for="age">Âge: </label>
-                <input type="text" v-model="age" id="age">
+                <input :class="{ error: age <= 0 || age > 100 }" type="text" v-model="age" id="age">
+                <span v-if="age <= 0 || age > 100">Veuillez entrer un âge compris entre 1 et 100</span>
             </div>
+            <div>
+                <label for="gender">Genre</label>
+                <select id="gender" v-model="gender">
+                    <option value="female">Femme</option>
+                    <option value="male">Homme</option>
+                </select>
+            </div>
+
+            <button @click="generate">Générer une personne</button>
         </div>
 
-        <div class="bg-yellow" v-if="name && age">
+        <div class="bg-yellow"
+             :class="{ 'bg-blue': gender == 'male', 'bg-pink': gender == 'female' }" v-if="name.length > 0 && age > 0 && age <= 100">
             <p>Mon nom est <strong>{{ name }}</strong> et j'ai <strong>{{ age }}</strong> ans.</p>
             <p>Dans 10 ans, j'aurai <strong>{{ old }}</strong> ans.</p>
             <p>Mon nom se compose de <strong>{{ name.length }}</strong> caractères.</p>
@@ -61,14 +94,34 @@
         Vue.createApp({
             data() {
                 return {
+                    randomNames: ['Toto', 'Titi', 'Tata', 'Tutu', 'Tete'],
                     name: 'Fiorella',
                     age: 2,
+                    gender: '',
                 };
             },
             computed: {
                 old() {
                     return +this.age + 10;
                 },
+            },
+            methods: {
+                generate() {
+                    let i = Math.floor(Math.random() * this.randomNames.length);
+                    this.name = this.randomNames[i];
+                    this.age = Math.floor(Math.random() * 100) + 1;
+                }
+            },
+            directives: {
+                focus: {
+                    mounted(el) {
+                        el.style.backgroundColor = 'yellow';
+                        // el.focus();
+                    }
+                }
+            },
+            mounted() { // Le code suivant s'exécute au chargement de la page
+                this.generate();
             },
         }).mount('#app');
     </script>
