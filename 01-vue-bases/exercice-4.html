@@ -15,6 +15,9 @@
         <input type="number" v-model="number1">
         <input type="number" v-model="number2">
         <p v-if="result">{{ result }}</p>
+        <input type="text" v-model="firstname"><input type="text" v-model="name">
+        <input type="text" v-model="fullName">
+        {{ fullName }}
     </div>
 
     <script src="https://unpkg.com/vue@3"></script>
@@ -24,9 +27,19 @@
                 return {
                     number1: 0,
                     number2: 0,
+                    name: 'Mota',
+                    firstname: 'Fiorella',
                 };
             },
             computed: {
+                fullName: {
+                    get() { return this.firstname + ' ' + this.name },
+                    set(value) {
+                        let names = value.split(' '); // ['Fiorella', 'Mota']
+                        this.firstname = names[0];
+                        this.name = names[1];
+                    },
+                },
                 result() {
                     let number1 = this.number1.toString(); // Transforme nombre en chaîne
                     let dozens = number1[number1.length - 2] || 0; // récupère la dizaine ou 0
