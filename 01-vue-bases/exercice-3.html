@@ -8,6 +8,14 @@
         [v-cloak] {
             display: none;
         }
+
+        .bleu {
+            color: blue;
+        }
+
+        .rouge {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -21,10 +29,33 @@
         </div>
         <button @click="add">Ajouter</button>
 
-        <label for="red">Rouge</label>
-        <input type="radio" v-model="message" value="Rouge" id="red">
-        <label for="blue">Bleu</label>
-        <input type="radio" v-model="message" value="Bleu" id="blue">
+        <h2>Radios</h2>
+        
+        <div>
+            <label for="red">Rouge</label>
+            <input type="radio" v-model="color" value="Rouge" id="red">
+            <label for="blue">Bleu</label>
+            <input type="radio" v-model="color" value="Bleu" id="blue">
+        </div>
+
+        <div>
+            <label for="display">Voulez-vous afficher le paragraphe ?</label>
+            <input type="checkbox" v-model="display" id="display">
+        </div>
+
+        <select v-model="font">
+            <option value="serif">serif</option>
+            <option value="sans-serif">sans-serif</option>
+            <option value="monospace">monospace</option>
+            <option value="cursive">cursive</option>
+            <option value="fantasy">fantasy</option>
+        </select>
+
+        <p v-if="display" :class="{ bleu: color == 'Bleu', rouge: color == 'Rouge' }"
+            :style="{ 'font-family': font }"
+        >
+            Paragraphe à afficher
+        </p>
     </div>
 
     <script src="https://unpkg.com/vue@3"></script>
@@ -34,6 +65,9 @@
                 return {
                     letters: [],
                     message: '',
+                    color: '',
+                    display: false,
+                    font: 'serif',
                 };
             },
             methods: {
