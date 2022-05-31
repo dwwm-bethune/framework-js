@@ -42,10 +42,19 @@
             </li>
         </ul>
 
+        <ul>
+            <!-- car est la valeur de l'itération (du tableau) et index est la clé -->
+            <li v-for="(car, index) of cars">
+                <!-- {{ car }} -->
+                ({{ index }}) Le véhicule {{ car.brand + ' ' + car.model }} est sorti en {{ car.year }}.
+                Il y a {{ currentYear - car.year }} ans.
+            </li>
+        </ul>
+
         <input type="text" v-model="message" @keyup.shift.alt.exact="display('test')">
         <input type="checkbox" v-model="success">
 
-        <div :class="{ success: name.length == 4, 'error danger': !success }"
+        <div :class="{ success: success == true, 'error danger': !success }"
              :style="{ border: success ? '5px solid #000' : '0' }">
             {{ success ? 'Succès' : 'Erreur' }}
         </div>
@@ -61,6 +70,12 @@
                     prenom: 'Steven',
                     success: false,
                     contacts: ['Fiorella', 'Marina'],
+                    cars: [
+                        { brand: 'Porsche', model: '911', year: 2010 },
+                        { brand: 'Maseratti', model: 'Ghibli', year: 2020 },
+                        { brand: 'Peugeot', model: '306', year: 1995 },
+                    ],
+                    currentYear: new Date().getFullYear(),
                 }
             },
             computed: {
