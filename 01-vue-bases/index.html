@@ -51,6 +51,12 @@
             </li>
         </ul>
 
+        {{ numbers[1] }}
+        <p v-for="number of numbers">
+            {{ number }}
+        </p>
+        <button @click="numbers.push(numbers.length + 1)">Ajouter</button>
+
         <input type="text" v-model="message" @keyup.shift.alt.exact="display('test')">
         <input type="checkbox" v-model="success">
 
@@ -76,6 +82,7 @@
                         { brand: 'Peugeot', model: '306', year: 1995 },
                     ],
                     currentYear: new Date().getFullYear(),
+                    numbers: [1, 2, 3],
                 }
             },
             computed: {
