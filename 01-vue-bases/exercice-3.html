@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 3</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <input type="text" v-model="message" @keyup.enter="add">
+        <div>
+            <span v-for="(letter, index) of letters">
+                {{ letter }}
+                <span v-if="index <= letters.length - 2">, </span>
+            </span>
+        </div>
+        <button @click="add">Ajouter</button>
+
+        <label for="red">Rouge</label>
+        <input type="radio" v-model="message" value="Rouge" id="red">
+        <label for="blue">Bleu</label>
+        <input type="radio" v-model="message" value="Bleu" id="blue">
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        var app = Vue.createApp({
+            data() {
+                return {
+                    letters: [],
+                    message: '',
+                };
+            },
+            methods: {
+                add() {
+                    this.letters.push(this.message);
+                    this.message = ''; // Permet de vider le champ
+                },
+            },
+        }).mount('#app');
+    </script>
+</body>
+</html>
