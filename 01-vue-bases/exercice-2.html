@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 2</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <h2>Liste des élèves</h2>
+        <table>
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Nom</td>
+                    <td>Note</td>
+                    <td>Groupe</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(eleve, index) in tableau" v-show="eleve.groupe == 'A'">
+                    <td>{{ index }}</td>
+                    <td>{{ eleve.nom }}</td>
+                    <td>{{ eleve.note }}</td>
+                    <td>{{ eleve.groupe }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Nom</td>
+                    <td>Note</td>
+                    <td>Groupe</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(eleve, index) in tableau" v-show="eleve.groupe == 'B'">
+                    <td>{{ index }}</td>
+                    <td>{{ eleve.nom }}</td>
+                    <td>{{ eleve.note }}</td>
+                    <td>{{ eleve.groupe }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button @click="title = 'Cliqué'">{{ title }}</button>
+
+        <h2>Saisir un texte sans espace</h2>
+        <input type="text" v-model="message" @keyup.space="showAlert">
+        <span v-if="error">Vous ne devez pas saisir d'espace</span>
+        <p>{{ message }}</p>
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        var app = Vue.createApp({
+            data() {
+                return {
+                    tableau: [
+                        { nom: 'Jean', note: 8, groupe: 'B' },
+                        { nom: 'Louis', note: 9, groupe: 'A' },
+                        { nom: 'François', note: 14, groupe: 'B' },
+                        { nom: 'Martin', note: 12, groupe: 'A' },
+                    ],
+                    title: 'Cliquez moi !',
+                    message: '',
+                    error: false,
+                };
+            },
+            methods: {
+                showAlert() {
+                    this.error = true; // affiche le message d'erreur
+
+                    // Méthode sans fonction fléchée
+                    var that = this;
+
+                    setTimeout(function () {
+                        // Si on utilise pas une fonction fléchée, on perd this
+                        // mais on peut le stocker dans une variable
+                        that.error = false; // Cache le message d'erreur
+                        console.log(this, that);
+                    }, 1000);
+
+                    // Méthode fléchée raccourcie...
+                    setTimeout(() => this.error = false, 1000);
+
+                    // Si on le mets sur plusieurs lignes
+                    setTimeout(() => {
+                        this.error = false;
+                    }, 1000);
+                },
+            },
+        }).mount('#app');
+    </script>
+</body>
+</html>
