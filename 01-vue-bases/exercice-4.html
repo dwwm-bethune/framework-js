@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 4</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <input type="number" v-model="number1">
+        <input type="number" v-model="number2">
+        <p v-if="result">{{ result }}</p>
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        var app = Vue.createApp({
+            data() {
+                return {
+                    number1: 0,
+                    number2: 0,
+                };
+            },
+            computed: {
+                result() {
+                    let number1 = this.number1.toString(); // Transforme nombre en chaîne
+                    let dozens = number1[number1.length - 2] || 0; // récupère la dizaine ou 0
+                    let unity = this.number2 % 10; // Récupère l'unité
+
+                    return dozens + unity; // Concatène 2 chaines
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
