@@ -4,19 +4,26 @@
     <XCard :color="theme" />
     <input v-model="theme">
     <div class="card">Test</div>
+
+    <h2>Composant Titre</h2>
+    <input v-model="propriete">
+    <XTitle :value="propriete" />
   </div>
 </template>
 
 <script>
 import XCard from './components/XCard.vue';
+import XTitle from './components/XTitle.vue';
 
 export default {
   components: {
     XCard,
+    XTitle,
   },
   data() {
     return {
       theme: 'lightblue',
+      propriete: 'Titre modifiable',
     }
   }
 }
