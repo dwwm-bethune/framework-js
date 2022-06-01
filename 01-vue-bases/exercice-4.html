@@ -12,12 +12,27 @@
 </head>
 <body>
     <div id="app" v-cloak>
-        <input type="number" v-model="number1">
-        <input type="number" v-model="number2">
-        <p v-if="result">{{ result }}</p>
-        <input type="text" v-model="firstname"><input type="text" v-model="name">
-        <input type="text" v-model="fullName">
-        {{ fullName }}
+        <div>
+            <input type="number" v-model="number1">
+            <input type="number" v-model="number2">
+            <p v-if="result">{{ result }}</p>
+        </div>
+
+        <div>
+            <input type="text" v-model="firstname"><input type="text" v-model="name">
+            <input type="text" v-model="fullName">
+            {{ fullName }}
+        </div>
+
+        <div>
+            <input type="number" v-model="code" max="7" min="0">
+            <label for="read">Read</label>
+            <input type="checkbox" v-model="read" id="read">
+            <label for="write">Write</label>
+            <input type="checkbox" v-model="write" id="write">
+            <label for="execute">Execute</label>
+            <input type="checkbox" v-model="execute" id="execute">
+        </div>
     </div>
 
     <script src="https://unpkg.com/vue@3"></script>
@@ -29,9 +44,28 @@
                     number2: 0,
                     name: 'Mota',
                     firstname: 'Fiorella',
+                    read: false,
+                    write: false,
+                    execute: false,
                 };
             },
             computed: {
+                code: {
+                    get() {
+                        let code = 0;
+
+                        code += this.read ? 4 : 0;
+                        code += this.write ? 2 : 0;
+                        code += this.execute ? 1 : 0;
+
+                        return code;
+                    },
+                    set(value) {
+                        this.execute = value >= 7 || value == 5 || value == 3 || value == 1;
+                        this.write = value >= 6 || value == 3 || value == 2;
+                        this.read = value >= 4;                
+                    },
+                },
                 fullName: {
                     get() { return this.firstname + ' ' + this.name },
                     set(value) {
