@@ -26,6 +26,16 @@
 
     <XTerm v-for="(term, index) in terms" :key="index" :term="term" />
 
+    <h2>Composant affichage II</h2>
+    <p>
+      Quel groupe afficher ?
+      <label for="group-a">Groupe A </label><input type="radio" v-model="group" value="A" id="group-a">
+      <label for="group-b">Groupe B </label><input type="radio" v-model="group" value="B" id="group-b">
+      <label for="group-all">Les deux </label><input type="radio" v-model="group" value="all" id="group-all">
+    </p>
+
+    <XStudents :tableau="students" :filter="group" />
+
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
   </div>
 </template>
@@ -33,6 +43,7 @@
 <script>
 import XCard from './components/XCard.vue';
 import XCounter from './components/XCounter.vue';
+import XStudents from './components/XStudents.vue';
 import XTerm from './components/XTerm.vue';
 import XTitle from './components/XTitle.vue';
 
@@ -40,6 +51,7 @@ export default {
   components: {
     XCard,
     XCounter,
+    XStudents,
     XTerm,
     XTitle,
   },
@@ -52,6 +64,13 @@ export default {
       // definition: '',
       term: { term: '', definition: '' },
       terms: [],
+      group: 'all',
+      students: [
+        { nom: 'Jean', notes: [8, 12, 13], groupe: 'B' },
+        { nom: 'Louis', notes: [9, 15, 16], groupe: 'A' },
+        { nom: 'François', notes: [14, 12], groupe: 'B' },
+        { nom: 'Martin', notes: [12, 7, 3], groupe: 'A' },
+      ],
     }
   },
   methods: {
