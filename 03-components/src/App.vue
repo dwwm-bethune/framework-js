@@ -8,16 +8,22 @@
     <h2>Composant Titre</h2>
     <input v-model="propriete">
     <XTitle :value="propriete" />
+
+    <h2>Composant Compteur</h2>
+    <XCounter />
+    <XCounter start="5" max="10" />
   </div>
 </template>
 
 <script>
 import XCard from './components/XCard.vue';
+import XCounter from './components/XCounter.vue';
 import XTitle from './components/XTitle.vue';
 
 export default {
   components: {
     XCard,
+    XCounter,
     XTitle,
   },
   data() {
