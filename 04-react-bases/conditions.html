@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditions</title>
+    <style>
+        .picture {
+            border: 5px solid #000;
+            border-radius: 20px;
+            object-fit: cover;
+            height: 200px;
+        }
+
+        .picture-logged {
+            border-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        function Avatar(props) {
+            return <img src={'chaton.jpeg'} className="picture picture-logged" onClick={props.onClick} />;
+        }
+
+        function UnknownAvatar(props) {
+            return <img src={'anonymous.jpg'} className="picture" onClick={props.onClick} />;
+        }
+
+        class Greeting extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    logged: this.props.logged,
+                    toys: [
+                        'Poupée',
+                        'Voiture',
+                        'Cuisine'
+                    ]
+                };
+            }
+
+            login = () => {
+                this.setState({ logged: true });
+            }
+
+            logout = () => {
+                this.setState({ logged: false });
+            }
+
+            render() {
+                let button = <h1 onClick={this.logout}>Bonjour Fiorella</h1>;
+
+                if (!this.state.logged) {
+                    button = <h1 onClick={this.login}>Au revoir Fiorella</h1>;
+                }
+
+                return <div>
+                    {button}
+                    {this.state.logged
+                        ? <Avatar onClick={this.logout} />
+                        : <UnknownAvatar onClick={this.login} />
+                    }
+                    {this.state.logged &&
+                        <div>
+                            <p>Comment ça va ?</p>
+                            <h2>Fiorella a {this.state.toys.length} jouets</h2>
+                            <ul>
+                                {this.state.toys.map((toy, index) => 
+                                    <li key={index}>{toy}</li>
+                                )}
+                            </ul>
+                        </div>
+                    }
+                </div>;
+            }
+        }
+
+        ReactDOM.render(<Greeting logged={true} />, document.getElementById('root'));
+    </script>
+</body>
+</html>
