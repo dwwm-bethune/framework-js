@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        // Exemple 1: React met à jour le DOM si nécessaire
+        var i = 0;
+
+        function render() {
+            ReactDOM.render(<h1>titre <span>{i}</span></h1>, document.getElementById('root'));
+            // document.getElementById('root').innerHTML = `<h1>titre <span>${i}</span></h1>`;
+            i++;
+        }
+
+        render();
+        // setInterval(render, 1000);
+
+        // Exemple 2: Créer un composant en fonction ou classe
+        function Welcome(props) {
+            return <h1>Bonjour {props.name}</h1>;
+        }
+
+        class Welcome2 extends React.Component {
+            render() {
+                return <h1 className="title">Bonjour {this.props.name}</h1>;
+            }
+        }
+
+        ReactDOM.render(
+            <div>
+                <Welcome name="Fiorella" />
+                <Welcome2 name="Marina" />
+                <Welcome2 name="Matthieu" />
+            </div>,
+            document.getElementById('root')
+        );
+
+        // Exemple 3: Le state d'un composant
+        class Clock extends React.Component {
+            constructor(props) { // S'exécute lors du chargement du composant
+                super(props); // Appelle le constructor de React.Component
+                this.state = { date: this.props.date };
+
+                setInterval(() => {
+                    // Change le state du composant autrement on rafraichit le DOM
+                    this.setState({ date: new Date() });
+                    console.log('ok');
+                }, 1000);
+            }
+
+            render() {
+                return (
+                    <div>
+                        <p>Il est {this.state.date.toLocaleTimeString()}.</p>
+                        <Button />
+                    </div>
+                );
+            }
+        } // FIN CLASSE CLOCK
+
+        class Button extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { open: false };
+            }
+
+            handleClick = () => {
+                console.log('ça marche...');
+                this.setState({ open: !this.state.open });
+            }
+
+            render() {
+                // if (this.state.open) {
+                //     return <button onClick={this.handleClick.bind(this)}>Off</button>;
+                // }
+
+                return <button onClick={this.handleClick}>
+                    {this.state.open ? 'Off' : 'On'}
+                </button>;
+            }
+        }
+
+        ReactDOM.render(<Clock date={new Date()} />, document.getElementById('root'));
+    </script>
+</body>
+</html>
