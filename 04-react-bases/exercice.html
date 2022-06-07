@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        class Counter extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { value: this.props.init };
+            }
+
+            increment = () => {
+                this.setState({ value: this.state.value + 1 });
+            }
+
+            decrement = () => {
+                this.setState({ value: this.state.value - 1 });
+            }
+
+            render() {
+                let button = <button onClick={this.increment}>+</button>;
+
+                if (this.state.value >= this.props.max) {
+                    button = null;
+                }
+
+                return (
+                    <div>
+                        <button onClick={this.decrement}>-</button>
+                        {this.state.value}
+                        {/* Un commentaire */}
+                        {button}
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(<Counter init={5} max={10} />, document.getElementById('root'));
+    </script>
+</body>
+</html>
