@@ -37,3 +37,11 @@
 .btn-marvel:hover {
   background-color: #eea5a5;
 }
+
+.btn-dc {
+  background-color: #000;
+}
+
+.btn-dc:hover {
+  background-color: #c5c5c5;
+}
