@@ -1,0 +1,39 @@
+.container {
+  width: 1000px;
+  margin: auto;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hero {
+  text-align: center;
+}
+
+.avatar {
+  width: 250px;
+  height: 250px;
+  margin: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.btn {
+  color: #fff;
+  border: 0;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+  border-radius: 20px;
+}
+
+.btn-marvel {
+  background-color: #f08080;
+}
+
+.btn-marvel:hover {
+  background-color: #eea5a5;
+}
