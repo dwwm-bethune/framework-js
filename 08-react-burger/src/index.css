@@ -1,13 +1,72 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-image: url(https://raw.githubusercontent.com/cosmicjs/restaurant-menu-app/master/static/background.jpg);
+  font-family: 'Open sans', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.container {
+  width: 600px;
+  margin: 50px auto 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.burger {
+  background-color: #fff;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+  gap: 10px;
+}
+
+.burger img {
+  height: 150px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.burger .text {
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.burger h2 {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.burger p {
+  margin: 0;
+}
+
+.burger .price {
+  font-family: 'Dancing Script', sans-serif;
+  font-weight: 700;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 25px;
+  background-color: #fbbf24;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 14px;
+  padding: 10px 15px;
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+.btn:hover {
+  background-color: #b45309;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
 }
