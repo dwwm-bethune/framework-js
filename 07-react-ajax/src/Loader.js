@@ -1,6 +1,6 @@
 function Loader() {
     return (
-        <div>
+        <div className="text-center my-5">
             <img src="img/loader.svg" className="loader" />
             <p>Chargement en cours...</p>
         </div>

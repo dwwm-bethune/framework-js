@@ -1,9 +1,11 @@
+import Sentences from './Sentences';
 import Users from './Users';
 
 function App() {
   return (
-    <div>
-      <Users />
+    <div className="container">
+      <Sentences />
+      {/*<Users />*/}
     </div>
   );
 }

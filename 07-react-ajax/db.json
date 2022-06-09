@@ -1,0 +1,7 @@
+{
+    "sentences": [
+        { "id": 1, "sentence": "Hello Fiorella", "author": "Daddy" },
+        { "id": 2, "sentence": "Hello Daddy", "author": "Fiorella" },
+        { "id": 3, "sentence": "Hello React", "author": "Fiorella" }
+    ]
+}
