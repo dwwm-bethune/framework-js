@@ -1,5 +1,5 @@
 function Loader() {
-    return <div class="loader">
+    return <div className="loader">
         <h2>Chargement en cours...</h2>
     </div>;
 }

@@ -9,11 +9,20 @@ class App extends React.Component {
     this.state = {
       burgers: [],
       loading: true,
+      selectedBurger: null,
     }
   }
 
   componentDidMount() {
     axios.get('http://localhost:3001/burgers').then(response => this.setState({ burgers: response.data, loading: false }));
+  }
+
+  selectBurger = (id) => {
+    axios.get('http://localhost:3001/burgers/' + id).then(response => this.setState({ selectedBurger: response.data }));
+  }
+
+  stopBurger = () => { // On masque le burger sélectionné en repassant la valeur du state
+    this.setState({ selectedBurger: null });
   }
 
   render() {
@@ -23,7 +32,10 @@ class App extends React.Component {
 
     return (
       <div className="container">
-        {this.state.burgers.map(burger => <Burger burger={burger} key={burger.id} />)}
+        {this.state.selectedBurger
+          ? <Burger burger={this.state.selectedBurger} onClick={this.stopBurger} />
+          : this.state.burgers.map(burger => <Burger burger={burger} key={burger.id} onClick={() => this.selectBurger(burger.id)} />)}
+        {/*this.state.burgers.map(burger => <Burger burger={burger} key={burger.id} onClick={() => this.selectBurger(burger.id)} />)*/}
       </div>
     );
   }

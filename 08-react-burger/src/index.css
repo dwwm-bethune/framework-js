@@ -1,6 +1,8 @@
 body {
   margin: 0;
-  background-image: url(https://raw.githubusercontent.com/cosmicjs/restaurant-menu-app/master/static/background.jpg);
+  background-image: url(../public/background.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
   font-family: 'Open sans', sans-serif;
 }
 
@@ -67,6 +69,8 @@ body {
   padding: 10px 15px;
   text-decoration: none;
   transition: 0.5s;
+  border: 0;
+  cursor: pointer;
 }
 
 .btn:hover {
