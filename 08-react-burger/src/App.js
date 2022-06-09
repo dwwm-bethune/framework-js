@@ -1,19 +1,26 @@
+import axios from 'axios';
 import React from 'react';
 import Burger from './Burger';
+import Loader from './Loader';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      burgers: [
-        { id: 1, name: 'Normal Burger', description: 'Un bon burger', image: 'https://foodish-api.herokuapp.com/images/burger/burger42.jpg', price: 8 },
-        { id: 2, name: 'King Burger', description: 'Un burger de roi', image: 'https://foodish-api.herokuapp.com/images/burger/burger19.jpg', price: 10 },
-        { id: 3, name: 'Double Burger', description: 'Un burger pour les grandes faims', image: 'https://foodish-api.herokuapp.com/images/burger/burger18.jpg', price: 12 }
-      ],
+      burgers: [],
+      loading: true,
     }
   }
 
+  componentDidMount() {
+    axios.get('http://localhost:3001/burgers').then(response => this.setState({ burgers: response.data, loading: false }));
+  }
+
   render() {
+    if (this.state.loading) {
+      return <div className="container"><Loader /></div>;
+    }
+
     return (
       <div className="container">
         {this.state.burgers.map(burger => <Burger burger={burger} key={burger.id} />)}
