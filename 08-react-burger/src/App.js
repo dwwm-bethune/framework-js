@@ -1,13 +1,14 @@
 import React from 'react';
+import Burger from './Burger';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       burgers: [
-        { name: 'Normal Burger', description: 'Un bon burger', image: 'https://foodish-api.herokuapp.com/images/burger/burger42.jpg', price: 8 },
-        { name: 'King Burger', description: 'Un burger de roi', image: 'https://foodish-api.herokuapp.com/images/burger/burger19.jpg', price: 10 },
-        { name: 'Double Burger', description: 'Un burger pour les grandes faims', image: 'https://foodish-api.herokuapp.com/images/burger/burger18.jpg', price: 12 }
+        { id: 1, name: 'Normal Burger', description: 'Un bon burger', image: 'https://foodish-api.herokuapp.com/images/burger/burger42.jpg', price: 8 },
+        { id: 2, name: 'King Burger', description: 'Un burger de roi', image: 'https://foodish-api.herokuapp.com/images/burger/burger19.jpg', price: 10 },
+        { id: 3, name: 'Double Burger', description: 'Un burger pour les grandes faims', image: 'https://foodish-api.herokuapp.com/images/burger/burger18.jpg', price: 12 }
       ],
     }
   }
@@ -15,19 +16,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-        {this.state.burgers.map(burger =>
-          <div className="burger flex">
-            <img src={burger.image} alt={burger.name} />
-            <div className="flex text">
-              <div>
-                <h2>{burger.name}</h2>
-                <p>{burger.description}</p>
-                <a className="btn" href="#">Voir</a>
-              </div>
-              <div className="price">{burger.price} €</div>
-            </div>
-          </div>
-        )}
+        {this.state.burgers.map(burger => <Burger burger={burger} key={burger.id} />)}
       </div>
     );
   }
