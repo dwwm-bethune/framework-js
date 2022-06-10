@@ -9,7 +9,9 @@ class Burger extends React.Component {
                     <div>
                         <h2>{this.props.burger.name}</h2>
                         <p>{this.props.burger.description}</p>
-                        <button className="btn" onClick={this.props.onClick}>Voir</button>
+                        <button className="btn" onClick={this.props.onClick}>
+                            {this.props.selected ? 'Arrêter' : 'Voir'}
+                        </button>
                     </div>
                     <div className="price">{this.props.burger.price} €</div>
                 </div>

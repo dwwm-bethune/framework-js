@@ -59,6 +59,22 @@ body {
   font-weight: 700;
 }
 
+.form {
+  text-align: center;
+  margin: 30px auto 30px;
+  width: 75%;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
 .btn {
   display: inline-block;
   margin-top: 25px;
@@ -75,6 +91,14 @@ body {
 
 .btn:hover {
   background-color: #b45309;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+}
+
+.btn:disabled:hover {
+  background-color: #fbbf24;
 }
 
 @media (max-width: 768px) {
