@@ -13,7 +13,7 @@ body {
   align-items: center;
 }
 
-.quizz {
+.quizz, .score {
   width: 800px;
   margin: 0 auto;
   background-color: #fff;
@@ -33,7 +33,7 @@ body {
   margin-bottom: 30px;
 }
 
-.question .response {
+.question .response, .score .retry {
   background-color: #3b82f6;
   border: 0;
   color: #fff;
@@ -41,10 +41,20 @@ body {
   display: block;
   width: 75%;
   margin: 0 auto 10px;
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 10px;
 }
 
-.question .response:hover {
+.question .response:hover, .score .retry:hover {
   background-color: #60a5fa;
+}
+
+.score h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.score .retry {
+  font-size: 20px;
+  width: auto;
 }
